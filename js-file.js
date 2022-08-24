@@ -5,11 +5,6 @@ let pixelAmount = 9;
 gameBuilder(pixelAmount);
 
 //interface
-const pixels = document.getElementsByClassName("pixel");
-for (i = 0; i < (pixelAmount * pixelAmount); i++)
-{
-    pixels[i].addEventListener("mouseover", mouseOver);
-}
 
 const buttons = document.querySelectorAll("div > button");
 buttons[0].addEventListener("click", changeColor);
@@ -23,15 +18,23 @@ function gameBuilder (pixelAmount) {
         //creates each level of pixels
         let row = document.createElement('div');
         etchSketch.appendChild(row);
-        row.setAttribute('id', "row" + i);
+        row.setAttribute('id', "row");
         for (j = 0; j < pixelAmount; j++) {
             //creates each row of pixels
             let pixel = document.createElement('div');
             row.appendChild(pixel);
             pixel.setAttribute('class', 'pixel'); 
-            pixel.setAttribute('id', ("column" + j)); 
+            pixel.setAttribute('id', ("column")); 
         }
     }
+    const pixels = document.getElementsByClassName("pixel");
+
+
+    for (i = 0; i < (pixelAmount * pixelAmount); i++)
+    {
+        pixels[i].addEventListener("mouseover", mouseOver);
+    }
+
 }
 
 function mouseOver (e) {
@@ -61,7 +64,9 @@ function mouseOver (e) {
                 color = "purple";
                 break;
         }
+        
         (e.target).setAttribute("style", "background:" + color);
+        (e.target).removeAttribute('id');
     }
 
 }
@@ -76,37 +81,23 @@ function changeColor (e) {
     else 
     {
         color = "black";
-        (e.target).id = ("openPixel");
-        
-        
+        (e.target).id = ("openPixel");   
     }
-
-
 }
 
 function gameDestroyer (){
-  
-    for (i = 0; i < (pixelAmount * pixelAmount); i++)
-{
-    pixels.removeChild(pixel);
-}
+        let etchSketch = document.querySelector('#etch-a-sketch');
+        while (etchSketch.firstChild)
+        {
+            etchSketch.removeChild(etchSketch.lastChild);
+        }
 
+  
 
 }
 
 function changeSize (e) {
-    size = gameBuilder(prompt("How high would you like your Etch-a-Sketch to be?"));
+    pixelAmount = prompt("How high would you like your Etch-a-Sketch to be?");
     gameDestroyer();
-    gameBuilder(size);
-
-
-
-color = "black";
-
-//interface
-pixels = document.getElementsByClassName("pixel");
-for (i = 0; i < (pixelAmount * pixelAmount); i++)
-{
-    pixels[i].addEventListener("mouseover", mouseOver);
-}
+    gameBuilder(pixelAmount);
 }
