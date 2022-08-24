@@ -1,5 +1,5 @@
 //body
-let color = "black";
+let color = "white";
 let pixelAmount = 9;
 
 gameBuilder(pixelAmount);
@@ -10,6 +10,7 @@ const buttons = document.querySelectorAll("div > button");
 buttons[0].addEventListener("click", changeColor);
 buttons[1].addEventListener("click", changeColor);
 buttons[2].addEventListener("click", changeSize);
+buttons[3].addEventListener("click", reset);
 
 //functions
 function gameBuilder (pixelAmount) {
@@ -28,19 +29,17 @@ function gameBuilder (pixelAmount) {
         }
     }
     const pixels = document.getElementsByClassName("pixel");
-
-
     for (i = 0; i < (pixelAmount * pixelAmount); i++)
     {
         pixels[i].addEventListener("mouseover", mouseOver);
     }
-
 }
 
 function mouseOver (e) {
-    if (color == "black")
+    //changes the color of the pixel if mouseover event
+    if (color == "white")
     {
-        (e.target).setAttribute("style", "background:black");
+        (e.target).setAttribute("style", "background:white");
     }
     else if ((e.target).id != "changedPixel")
     {
@@ -63,15 +62,14 @@ function mouseOver (e) {
             case 4:
                 color = "purple";
                 break;
-        }
-        
+        }   
         (e.target).setAttribute("style", "background:" + color);
         (e.target).removeAttribute('id');
     }
-
 }
 
 function changeColor (e) {
+    //changes the user color preference
     console.log(e);
     if (e.target == buttons[1])
     {
@@ -80,24 +78,35 @@ function changeColor (e) {
     }
     else 
     {
-        color = "black";
+        color = "white";
         (e.target).id = ("openPixel");   
     }
 }
 
 function gameDestroyer (){
+    //eliminates pixels one by one
         let etchSketch = document.querySelector('#etch-a-sketch');
         while (etchSketch.firstChild)
         {
             etchSketch.removeChild(etchSketch.lastChild);
         }
-
-  
-
 }
 
 function changeSize (e) {
+    //resets the etch a sketch and builds a new custom-sized one
     pixelAmount = prompt("How high would you like your Etch-a-Sketch to be?");
+    if (pixelAmount < 65 && pixelAmount != 0)
+    {
+        gameDestroyer();
+        gameBuilder(pixelAmount);
+    }
+    else{
+        alert("Please enter a value under 65!");
+    }
+}
+
+function reset() {
+    //resets the etch a sketch so that the original board is built
     gameDestroyer();
-    gameBuilder(pixelAmount);
+    gameBuilder(8);
 }

@@ -1,36 +1,59 @@
 body {
-    background-color: cornflowerblue;
+    background-color: #393e41;
 }
 
 h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #E2C044;
+
+    font-family: 'Julius Sans One', sans-serif;
 }
 
 #controls {
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    margin-left: 510px;
+    margin-right: 510px;
+    margin-top: 50px;
+
+    gap: 10px;
+}
+
+button {
+    width: 105px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+#mid {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    margin-top: 65px;
 }
 
 #etch-a-sketch {
     display: flex;
     justify-content: center;
     align-items: center;
-
-
-
-
-
-
 }
 
+#row {
+    display: flex;
+    flex-direction: column;
+}
 .pixel {
-    background-color: white;
+    background-color: black;
+    min-width: 15px;
+    min-height: 15px;
 
-    width: 20px;
-    height: 20px;
-    
+    border: #E2C044 solid 2px;
+    border-radius: 12px;    
 }
 
